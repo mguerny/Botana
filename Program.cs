@@ -81,7 +81,9 @@ namespace Botana
                 await message.Channel.SendMessageAsync(mot.value);
 
             }
-
+            if (message.Content.StartsWith("!dés")){
+                await message.Channel.SendMessageAsync(des.random(message.Content));
+            }
             if ((message.Content.StartsWith("!pendu") && !gameStarted) || penduStarted)
             {
                 if (!penduStarted)
