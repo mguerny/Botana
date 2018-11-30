@@ -63,6 +63,7 @@ namespace Botana
                     allowedChannel = true;
                 }
             }
+
             if (!allowedChannel)
             {
                 return;
@@ -72,13 +73,15 @@ namespace Botana
             {
                 await message.Channel.SendMessageAsync("Pong!");
             }
-            if (message.Content == "!mot" && !gameStarted)
+
+            if (message.Content.StartsWith("!mot") && !gameStarted)
             {
                 // écrit un mot aléatoire
                 Mot mot = new Mot();
                 await message.Channel.SendMessageAsync(mot.value);
 
             }
+
             if ((message.Content.StartsWith("!pendu") && !gameStarted) || penduStarted)
             {
                 if (!penduStarted)
@@ -86,38 +89,23 @@ namespace Botana
                     penduStarted = true;
                     gameStarted = true;
                     pendu = new Pendu();
-                    Console.WriteLine(pendu.mot.value);
                     await message.Channel.SendMessageAsync(pendu.guess);
-                    Console.WriteLine(pendu.guess);
                 }
                 else
                 {
-                    string motHidden = pendu.mot.value;
-                    string mot = message.Content;
-
-                    if (mot.Length > 1)
+                    if (message.Content.Length > 1)
                     {
                         await message.Channel.SendMessageAsync("Une seule lettre svp");
                     }
                     else
                     {
-                        char c = mot[0];
-                        pendu.reveal(c);
-                        await message.Channel.SendMessageAsync(pendu.guess);
-                        if (pendu.guess.IndexOf('-') == -1)
+                        string toDisplay = pendu.step(message.Content[0]);
+                        await message.Channel.SendMessageAsync(toDisplay);
+
+                        if (pendu.isFinished || pendu.isWon)
                         {
-                            await message.Channel.SendMessageAsync("Gagné !");
                             penduStarted = false;
                             gameStarted = false;
-                        }
-                        else
-                        {
-                            if (pendu.isFinish)
-                            {
-                                await message.Channel.SendMessageAsync("Perdu !");
-                                penduStarted = false;
-                                gameStarted = false;
-                            }
                         }
                     }
                 }
