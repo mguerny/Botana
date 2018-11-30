@@ -2,8 +2,13 @@ solve
 pendu
 pause truc
 morpion 2 joueurs / ai
-cékoi
+
+cï¿½koi
+
 pokemon ? se renseigner / compagnon
+
 easteregg insulte
 
-lancer de des
+ lancer les dï¿½s, afficher la carte,  "prochaine sï¿½ance",  "fiche de personnage"
+
+Le truc compte les points

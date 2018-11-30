@@ -110,6 +110,15 @@ namespace Botana
                             penduStarted = false;
                             gameStarted = false;
                         }
+                        else
+                        {
+                            if (pendu.isFinish)
+                            {
+                                await message.Channel.SendMessageAsync("Perdu !");
+                                penduStarted = false;
+                                gameStarted = false;
+                            }
+                        }
                     }
                 }
             }
