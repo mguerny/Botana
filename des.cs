@@ -16,12 +16,17 @@ namespace Botana
             string answer = "";
             string[] splited = message.Split(' ');
 
+            if(splited.Length < 2){
+                answer += "La commande doit être suivie d'un espace.";
+                return answer;
+            }
+
             int n = 0;
             bool isNumeric = int.TryParse(splited[1], out n);
 
             if (!isNumeric || n < 1)
             {
-                answer += "La commande doit être suivie d'un espace puis d'un nombre supérieur à 1";
+                answer += "La commande doit être suivie d'un nombre supérieur à 1";
             }
             else
             {
@@ -32,5 +37,4 @@ namespace Botana
             return answer;
         }
     }
-
 }
