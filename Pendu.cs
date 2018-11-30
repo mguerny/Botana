@@ -14,6 +14,7 @@ namespace Botana
         {
             mot = new Mot();
             mot.value = mot.value.ToLower();
+            mot.value = Remove.removeAccents(mot.value);
             guess = "";
             lifes = 10;
 
@@ -26,8 +27,10 @@ namespace Botana
         internal void reveal(char c)
         {
             StringBuilder strBuilder = new StringBuilder(guess);
-            for(int i = 0; i<guess.Length; i++){
-                if (mot.value[i] == c){
+            for (int i = 0; i < guess.Length; i++)
+            {
+                if (mot.value[i] == c)
+                {
                     strBuilder[i] = c;
                 }
             }
