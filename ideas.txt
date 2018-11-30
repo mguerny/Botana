@@ -1,5 +1,5 @@
-solve
-pendu
+﻿solve
+
 pause truc
 morpion 2 joueurs / ai
 
@@ -9,6 +9,6 @@ pokemon ? se renseigner / compagnon
 
 easteregg insulte
 
- lancer les d�s, afficher la carte,  "prochaine s�ance",  "fiche de personnage"
+ afficher la carte,  "prochaine s�ance",  "fiche de personnage"
 
 Le truc compte les points

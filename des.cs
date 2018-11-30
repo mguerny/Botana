@@ -5,6 +5,12 @@ namespace Botana
 {
     internal class des
     {
+        /// <summary>
+        /// This method takes the wall message who start by: !dés [...] and extract a number out of it. 
+        /// Then it sends a string that will be displayed by the bot.
+        /// </summary>
+        /// <param name="message">A string send by the user.</param>
+        /// <returns>A random number between 1 and the number send by the user or the instructions to use this method.</returns>
         public static String random(string message)
         {
             string answer = "";
@@ -13,12 +19,9 @@ namespace Botana
             int n = 0;
             bool isNumeric = int.TryParse(splited[1], out n);
 
-            Console.WriteLine(isNumeric);
-            Console.WriteLine(n);
-
             if (!isNumeric || n < 1)
             {
-                answer += "La commande doit être suivie de :\" C\" avec C un nombre supérieur à 1";
+                answer += "La commande doit être suivie d'un espace puis d'un nombre supérieur à 1";
             }
             else
             {
