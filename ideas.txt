@@ -1,0 +1,7 @@
+solve
+pendu
+pause truc
+morpion 2 joueurs / ai
+cékoi
+pokemon ? se renseigner / compagnon
+easteregg insulte
