@@ -5,3 +5,5 @@ morpion 2 joueurs / ai
 cékoi
 pokemon ? se renseigner / compagnon
 easteregg insulte
+
+lancer de des
