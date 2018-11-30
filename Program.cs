@@ -79,11 +79,12 @@ namespace Botana
                 await message.Channel.SendMessageAsync(mot.value);
 
             }
-            if ((message.Content.StartsWith("!pendu") && !gameStarted)|| penduStarted)
+            if ((message.Content.StartsWith("!pendu") && !gameStarted) || penduStarted)
             {
                 if (!penduStarted)
                 {
                     penduStarted = true;
+                    gameStarted = true;
                     pendu = new Pendu();
                     Console.WriteLine(pendu.mot.value);
                     await message.Channel.SendMessageAsync(pendu.guess);
@@ -103,6 +104,12 @@ namespace Botana
                         char c = mot[0];
                         pendu.reveal(c);
                         await message.Channel.SendMessageAsync(pendu.guess);
+                        if (pendu.guess.IndexOf('-') == -1)
+                        {
+                            await message.Channel.SendMessageAsync("Gagné !");
+                            penduStarted = false;
+                            gameStarted = false;
+                        }
                     }
                 }
             }
