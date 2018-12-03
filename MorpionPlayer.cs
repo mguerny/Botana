@@ -1,8 +1,8 @@
 namespace Botana
 {
-    internal class Joueur
+    internal class MorpionPlayer
     {
-        public Joueur(string name)
+        public MorpionPlayer(string name)
         {
             discordName = name;
         }

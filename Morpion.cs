@@ -5,8 +5,8 @@ namespace Botana
     internal class Morpion
     {
 
-        Joueur j1;
-        Joueur j2;
+        MorpionPlayer j1;
+        MorpionPlayer j2;
 
         string current;
 
@@ -18,7 +18,7 @@ namespace Botana
 
         string[] emojis = new string[] { ":black_large_square:", ":large_blue_circle:", ":red_circle:" };
 
-        public Morpion(Joueur j1, Joueur j2)
+        public Morpion(MorpionPlayer j1, MorpionPlayer j2)
         {
             isWon = false;
             this.j1 = j1;

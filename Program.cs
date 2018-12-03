@@ -19,8 +19,8 @@ namespace Botana
         System.IO.StreamReader file;
         List<string> channels;
 
-        Joueur j1 = null;
-        Joueur j2;
+        MorpionPlayer j1 = null;
+        MorpionPlayer j2;
         Morpion morpion;
 
         private DiscordSocketClient _client;
@@ -86,9 +86,17 @@ namespace Botana
                 await message.Channel.SendMessageAsync(mot.value);
 
             }
+
             if (message.Content.StartsWith("!dés"))
             {
                 await message.Channel.SendMessageAsync(des.random(message.Content));
+            }
+
+            if (message.Content.StartsWith("!rpg"))
+            {
+                string playerName = message.Content.Split(" ")[1];
+                RPGPlayer rpg = new RPGPlayer(playerName);
+                await message.Channel.SendMessageAsync(rpg.displayStats());
             }
 
             if ((message.Content.StartsWith("!pendu") && !gameStarted) || penduStarted)
@@ -126,11 +134,11 @@ namespace Botana
                 {
                     if (j1 == null)
                     {
-                        j1 = new Joueur(message.Author.Username);
+                        j1 = new MorpionPlayer(message.Author.Username);
                     }
                     else
                     {
-                        j2 = new Joueur(message.Author.Username);
+                        j2 = new MorpionPlayer(message.Author.Username);
                         gameStarted = true;
                         morpionStarted = true;
                         morpion = new Morpion(j1, j2);
