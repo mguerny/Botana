@@ -150,6 +150,24 @@ namespace Botana
                     else
                     {
                         await message.Channel.SendMessageAsync(morpion.step(n, message.Author.Username));
+                        if (morpion.isWon)
+                        {
+                            string winner = message.Author.Mention;
+                            winner += " a gagné !";
+                            await message.Channel.SendMessageAsync(winner);
+                            gameStarted = false;
+                            morpionStarted = false;
+                            j1 = null;
+                            j2 = null;
+                        }
+                        if (morpion.isEnd)
+                        {
+                            await message.Channel.SendMessageAsync("Égalité");
+                            gameStarted = false;
+                            morpionStarted = false;
+                            j1 = null;
+                            j2 = null;
+                        }
                     }
                 }
                 //await message.Channel.SendMessageAsync("Pong!");
