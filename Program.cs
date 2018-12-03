@@ -14,9 +14,14 @@ namespace Botana
     {
         bool gameStarted = false;
         bool penduStarted = false;
+        bool morpionStarted = false;
         Pendu pendu;
         System.IO.StreamReader file;
         List<string> channels;
+
+        Joueur j1 = null;
+        Joueur j2;
+        Morpion morpion;
 
         private DiscordSocketClient _client;
 
@@ -81,9 +86,11 @@ namespace Botana
                 await message.Channel.SendMessageAsync(mot.value);
 
             }
-            if (message.Content.StartsWith("!dés")){
+            if (message.Content.StartsWith("!dés"))
+            {
                 await message.Channel.SendMessageAsync(des.random(message.Content));
             }
+
             if ((message.Content.StartsWith("!pendu") && !gameStarted) || penduStarted)
             {
                 if (!penduStarted)
@@ -111,6 +118,41 @@ namespace Botana
                         }
                     }
                 }
+            }
+
+            if ((message.Content == "!morpion" && !gameStarted) || morpionStarted)
+            {
+                if (!morpionStarted)
+                {
+                    if (j1 == null)
+                    {
+                        j1 = new Joueur(message.Author.Username);
+                    }
+                    else
+                    {
+                        j2 = new Joueur(message.Author.Username);
+                        gameStarted = true;
+                        morpionStarted = true;
+                        morpion = new Morpion(j1, j2);
+                        await message.Channel.SendMessageAsync(morpion.display());
+                        await message.Channel.SendMessageAsync("Jouer avec le pavé numérique (en haut à droite => 9)");
+                    }
+                }
+                else
+                {
+                    int n = 0;
+                    bool isNumeric = int.TryParse(message.Content, out n);
+
+                    if (!isNumeric || n < 1 || n > 9)
+                    {
+                        await message.Channel.SendMessageAsync("Rentrer un chiffre entre 1 et 9");
+                    }
+                    else
+                    {
+                        await message.Channel.SendMessageAsync(morpion.step(n, message.Author.Username));
+                    }
+                }
+                //await message.Channel.SendMessageAsync("Pong!");
             }
         }
 
