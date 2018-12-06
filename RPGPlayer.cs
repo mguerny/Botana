@@ -5,12 +5,15 @@ namespace Botana
 {
     internal class RPGPlayer
     {
+        public bool valid = true;
+
         List<Stat> stats = new List<Stat>();
         System.IO.StreamReader file;
 
         // but : load les stats depuis un fichier texte qui s'appelerait playerName.txt
         public RPGPlayer(string playerName)
         {
+            
             file = new System.IO.StreamReader(playerName + ".txt");
 
             string line;
@@ -24,23 +27,34 @@ namespace Botana
                 if (!isNumeric)
                 {
                     Console.WriteLine("Player stats file error");
+                    valid = false;
                 }
                 else
                 {
                     stats.Add(new Stat(statName, statValue));
                 }
             }
+            file.Close();
         }
 
         public string displayStats()
         {
             string output = "";
-            foreach(Stat s in stats)
+            foreach (Stat s in stats)
             {
                 output += s.name + " " + s.value;
                 output += Environment.NewLine;
             }
             return output;
+        }
+
+        internal string display()
+        {
+            if (!valid)
+            {
+                return "Stats invalides";
+            }
+            return displayStats();
         }
     }
 }

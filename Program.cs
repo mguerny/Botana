@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Discord;
+using Discord.Rest;
 using Discord.WebSocket;
 
 namespace Botana
@@ -22,6 +23,8 @@ namespace Botana
         MorpionPlayer j1 = null;
         MorpionPlayer j2;
         Morpion morpion;
+
+        RestUserMessage morpionDisplay;
 
         private DiscordSocketClient _client;
 
@@ -94,9 +97,25 @@ namespace Botana
 
             if (message.Content.StartsWith("!rpg"))
             {
-                string playerName = message.Content.Split(" ")[1];
-                RPGPlayer rpg = new RPGPlayer(playerName);
-                await message.Channel.SendMessageAsync(rpg.displayStats());
+                string[] input = message.Content.Split(" ");
+                if (input.Length != 2)
+                {
+                    await message.Channel.SendMessageAsync("Commande invalide");
+                }
+                else
+                {
+                    string playerName = input[1];
+                    RPGPlayer rpg;
+                    try
+                    {
+                        rpg = new RPGPlayer(playerName);
+                        await message.Channel.SendMessageAsync(rpg.display());
+                    }
+                    catch
+                    {
+                        await message.Channel.SendMessageAsync("Joueur inconnu");
+                    }
+                }
             }
 
             if ((message.Content.StartsWith("!pendu") && !gameStarted) || penduStarted)
@@ -142,8 +161,8 @@ namespace Botana
                         gameStarted = true;
                         morpionStarted = true;
                         morpion = new Morpion(j1, j2);
-                        await message.Channel.SendMessageAsync(morpion.display());
                         await message.Channel.SendMessageAsync("Jouer avec le pavé numérique (en haut à droite => 9)");
+                        morpionDisplay = await message.Channel.SendMessageAsync(morpion.display());
                     }
                 }
                 else
@@ -153,11 +172,12 @@ namespace Botana
 
                     if (!isNumeric || n < 1 || n > 9)
                     {
-                        await message.Channel.SendMessageAsync("Rentrer un chiffre entre 1 et 9");
+                        await updateMorpion(message, null);
                     }
                     else
                     {
-                        var morpionMessage = await message.Channel.SendMessageAsync(morpion.step(n, message.Author.Username));
+                        await updateMorpion(message, morpion.step(n, message.Author.Username));
+                        await message.DeleteAsync();
                         if (morpion.isWon)
                         {
                             string winner = message.Author.Mention;
@@ -178,6 +198,19 @@ namespace Botana
                         }
                     }
                 }
+            }
+        }
+
+        private async Task updateMorpion(SocketMessage message, string toDisplay)
+        {
+            await morpionDisplay.DeleteAsync();
+            if (toDisplay == null)
+            {
+                morpionDisplay = await message.Channel.SendMessageAsync(morpion.display());
+            }
+            else
+            {
+                morpionDisplay = await message.Channel.SendMessageAsync(toDisplay);
             }
         }
 

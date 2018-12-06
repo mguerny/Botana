@@ -48,11 +48,13 @@ namespace Botana
 
             if (array[positions[0], positions[1]] != 0)
             {
-                returnString += "Quelqu'un a déjà joué ici :angry:";
+                returnString += "Quelqu'un a déjà joué ici :angry:" + Environment.NewLine;
+                returnString += display();
             }
             else if (player != current)
             {
-                returnString += "Ce n'est pas à vous de jouer !";
+                returnString += "Ce n'est pas à vous de jouer !" + Environment.NewLine;
+                returnString += display();
             }
             else
             {
@@ -62,7 +64,7 @@ namespace Botana
             }
 
             isWon = getWon();
-            isEnd = getEnd();
+            isEnd = getEnd() && !isWon;
 
             return returnString;
         }
