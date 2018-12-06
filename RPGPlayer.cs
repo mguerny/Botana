@@ -23,7 +23,7 @@ namespace Botana
 
                 if (!isNumeric)
                 {
-                    Console.WriteLine("Player stats fiile error");
+                    Console.WriteLine("Player stats file error");
                 }
                 else
                 {
