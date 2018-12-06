@@ -6,11 +6,11 @@ namespace Botana
     internal class des
     {
         /// <summary>
-        /// This method takes the wall message who start by: !dés [...] and extract a number out of it. 
+        /// This method takes the whole message that starts by: !dés [...] and extracts a number out of it. 
         /// Then it sends a string that will be displayed by the bot.
         /// </summary>
-        /// <param name="message">A string send by the user.</param>
-        /// <returns>A random number between 1 and the number send by the user or the instructions to use this method.</returns>
+        /// <param name="message">A string sent by the user.</param>
+        /// <returns>A random number between 1 and the number sent by the user or the instructions to use this method.</returns>
         public static String random(string message)
         {
             string answer = "";
