@@ -84,7 +84,6 @@ namespace Botana
 
             if (message.Content.StartsWith("!mot"))
             {
-                // écrit un mot aléatoire
                 Mot mot = new Mot();
                 await message.Channel.SendMessageAsync(mot.value);
 
@@ -92,7 +91,7 @@ namespace Botana
 
             if (message.Content.StartsWith("!dés"))
             {
-                await message.Channel.SendMessageAsync(des.random(message.Content));
+                await message.Channel.SendMessageAsync(Des.random(message.Content));
             }
 
             if (message.Content.StartsWith("!rpg"))
@@ -188,7 +187,7 @@ namespace Botana
                             j1 = null;
                             j2 = null;
                         }
-                        if (morpion.isEnd)
+                        if(morpion.isEnd)
                         {
                             await message.Channel.SendMessageAsync("Égalité");
                             gameStarted = false;

@@ -5,7 +5,7 @@ namespace Botana
 {
     public static class Remove
     {
-
+        
         public static string removeAccents(string input)
         {
             var list = new List<KeyValuePair<char, List<char>>>();
@@ -46,10 +46,12 @@ namespace Botana
             StringBuilder strBuilder = new StringBuilder(input);
             for (int i = 0; i < input.Length; i++)
             {
-                foreach(KeyValuePair<char, List<char>> listKeyValue in list)
+                foreach (KeyValuePair<char, List<char>> listKeyValue in list)
                 {
-                    foreach(char c in listKeyValue.Value){
-                        if(input[i] == c){
+                    foreach (char c in listKeyValue.Value)
+                    {
+                        if (input[i] == c)
+                        {
                             strBuilder[i] = listKeyValue.Key;
                         }
                     }

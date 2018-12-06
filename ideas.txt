@@ -1,9 +1,9 @@
-﻿solve
+﻿solve: calculette
 
-pause truc
+pause truc: 
 morpion 2 joueurs / ai
 
-c�koi
+c�koi: va chercher le wikipédia
 
 pokemon ? se renseigner / compagnon
 
@@ -12,3 +12,6 @@ easteregg insulte
  afficher la carte,  "prochaine s�ance",  "fiche de personnage"
 
 Le truc compte les points
+
+Utiliser redis pour la base de données.
+

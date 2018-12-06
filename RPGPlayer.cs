@@ -10,7 +10,12 @@ namespace Botana
         List<Stat> stats = new List<Stat>();
         System.IO.StreamReader file;
 
-        // but : load les stats depuis un fichier texte qui s'appelerait playerName.txt
+        // but : load les stats depuis un fichier texte qui s'appelerait "playerName".txt
+
+        /// <summary>
+        /// This method will create a instance an RPG player by reading a txt.
+        /// </summary>
+        /// <param name="playerName">A string with the name of the player.</param>
         public RPGPlayer(string playerName)
         {
             
@@ -42,7 +47,7 @@ namespace Botana
             string output = "";
             foreach (Stat s in stats)
             {
-                output += s.name + " " + s.value;
+                output += s.name + ": " + s.value;
                 output += Environment.NewLine;
             }
             return output;

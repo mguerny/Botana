@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Botana
 {
-    internal class des
+    internal class Des
     {
         /// <summary>
         /// This method takes the whole message that starts by: !dés [...] and extracts a number out of it. 
