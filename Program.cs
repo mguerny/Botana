@@ -74,12 +74,12 @@ namespace Botana
                 return;
             }
 
-            if (message.Content == "!ping" && !gameStarted)
+            if (message.Content == "!ping")
             {
                 await message.Channel.SendMessageAsync("Pong!");
             }
 
-            if (message.Content.StartsWith("!mot") && !gameStarted)
+            if (message.Content.StartsWith("!mot"))
             {
                 // écrit un mot aléatoire
                 Mot mot = new Mot();
@@ -157,7 +157,7 @@ namespace Botana
                     }
                     else
                     {
-                        await message.Channel.SendMessageAsync(morpion.step(n, message.Author.Username));
+                        var morpionMessage = await message.Channel.SendMessageAsync(morpion.step(n, message.Author.Username));
                         if (morpion.isWon)
                         {
                             string winner = message.Author.Mention;
@@ -178,7 +178,6 @@ namespace Botana
                         }
                     }
                 }
-                //await message.Channel.SendMessageAsync("Pong!");
             }
         }
 
