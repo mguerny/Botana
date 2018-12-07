@@ -22,31 +22,31 @@ namespace Botana
                 return answer;
             }
 
-            int n = 0;
-            int m = 1;
+            int Faces = 0;
+            int throws = 1;
             bool isNumeric1 = int.TryParse(splited[1], out n);
 
             if (splited.Length > 2)
             {
-                int o = 0;
-                bool isNumeric2 = int.TryParse(splited[2], out o);
-                if (!isNumeric2 || o < 1)
+                int intermediaryThrow = 0;
+                bool isNumeric2 = int.TryParse(splited[2], out intermediaryThrow);
+                if (!isNumeric2 || intermediaryThrow < 1)
                 {
                     answer += "Le nombre de lancés doit être un nombre supérieur à 1.";
                 }
-                m = o;
+                throws = intermediaryThrow;
             }
 
-            if (!isNumeric1 || n < 1)
+            if (!isNumeric1 || Faces < 1)
             {
                 answer += "La commande doit être suivie d'un nombre supérieur à 1";
             }
             else
             {
-                for (int i = 0; i < m; i++)
+                for (int i = 0; i < throws; i++)
                 {
                     Random rnd = new Random();
-                    int chiffre = rnd.Next(1, n + 1);
+                    int chiffre = rnd.Next(1, Faces + 1);
                     answer += chiffre.ToString();
                     answer += " ";
                 }
