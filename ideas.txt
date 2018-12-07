@@ -13,5 +13,20 @@ easteregg insulte
 
 Le truc compte les points
 
-Utiliser redis pour la base de données.
+La base de donné:
+	Les groupes: 1MJ, Xjoueurs
+		Créer un groupe, afficher le groupe.
+			Création d'un groupe avec 3 parametres: 	
+				Nom du JDR
+				1MJ / none
+				liste de joueurs
 
+			Affichage d'un groupe avec le nom du jdr:
+				Afficher: 1MJ / none
+				Afficher: liste de joueurs
+
+			Supprimer un groupe:			
+
+	Les fiches persos: les lires.
+
+		
