@@ -22,9 +22,7 @@ namespace Botana
                 return answer;
             }
 
-            int Faces = 0;
-            int throws = 1;
-            bool isNumeric1 = int.TryParse(splited[1], out n);
+            int throws = 1;         
 
             if (splited.Length > 2)
             {
@@ -36,6 +34,9 @@ namespace Botana
                 }
                 throws = intermediaryThrow;
             }
+            
+            int Faces = 0;
+            bool isNumeric1 = int.TryParse(splited[1], out Faces);
 
             if (!isNumeric1 || Faces < 1)
             {
