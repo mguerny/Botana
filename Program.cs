@@ -25,6 +25,7 @@ namespace Botana
         Morpion morpion;
 
         RestUserMessage morpionDisplay;
+        RestUserMessage penduDisplay;
 
         private DiscordSocketClient _client;
 
@@ -124,18 +125,19 @@ namespace Botana
                     penduStarted = true;
                     gameStarted = true;
                     pendu = new Pendu();
-                    await message.Channel.SendMessageAsync(pendu.guess);
+                    penduDisplay = await message.Channel.SendMessageAsync(pendu.guess);
                 }
                 else
                 {
-                    if (message.Content.Length > 1)
+                    if (message.Content.Length > 1 || !Char.IsLetter(message.Content[0]))
                     {
-                        await message.Channel.SendMessageAsync("Une seule lettre svp");
+                        await updatePendu(message, null);
                     }
                     else
                     {
                         string toDisplay = pendu.step(message.Content[0]);
-                        await message.Channel.SendMessageAsync(toDisplay);
+                        await updatePendu(message, toDisplay);
+                        await message.DeleteAsync();
 
                         if (pendu.isFinished || pendu.isWon)
                         {
@@ -210,6 +212,19 @@ namespace Botana
             else
             {
                 morpionDisplay = await message.Channel.SendMessageAsync(toDisplay);
+            }
+        }
+
+        private async Task updatePendu(SocketMessage message, string toDisplay)
+        {
+            await penduDisplay.DeleteAsync();
+            if (toDisplay == null)
+            {
+                penduDisplay = await message.Channel.SendMessageAsync(pendu.display());
+            }
+            else
+            {
+                penduDisplay = await message.Channel.SendMessageAsync(toDisplay);
             }
         }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Botana
@@ -9,6 +10,8 @@ namespace Botana
         public Boolean isFinished { get; private set; }
         public Boolean isWon { get; private set; }
         public string guess { get; private set; }
+
+        public List<char> liste = new List<char>();
 
         private Mot mot;
 
@@ -33,6 +36,7 @@ namespace Botana
         /// <returns>A string that represent the state of the game, "Perdu, ...', "Gagné ! ...!--" or empty if it's not win nor lose.</returns>
         public string step(char character)
         {
+            liste.Add(character);
             string returnString = "";
             // si pas de lettre trouvée, décrémente lifes
             lifes += reveal(character) ? 0 : -1;
@@ -42,6 +46,8 @@ namespace Botana
             isWon = (guess.IndexOf('-') == -1);
             isFinished = (lifes == 0);
 
+            returnString = returnString + computeListe();
+            
             if (isFinished)
             {
                 returnString += "\n";
@@ -53,8 +59,27 @@ namespace Botana
                 returnString += "Gagné ! (" + lifes + " Vie(s) restante.)";
             }
 
+
+
             return returnString;
         }
+
+        private string computeListe()
+        {
+            string returnString = Environment.NewLine;
+            returnString += "Lettres proposées : ";
+            foreach (char c in liste)
+            {
+                returnString += " " + c;
+            }
+            return returnString;
+        }
+
+        public string display()
+        {
+            return (guess + computeListe());
+        }
+
         /// <summary>
         /// This method use the char sent by the user to update the guess and return a letter that represent if a letter was find.
         /// </summary>
