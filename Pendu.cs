@@ -50,13 +50,13 @@ namespace Botana
             if (isWon)
             {
                 returnString += "\n";
-                returnString += "Gagné ! (" + (10 - lifes + guess.Length) + " tentatives)";
+                returnString += "Gagné ! (" + lifes + " Vie(s) restante.)";
             }
 
             return returnString;
         }
         /// <summary>
-        /// This method use the char sent by the user to update the guess and return a letter taht represent if a letter was find.
+        /// This method use the char sent by the user to update the guess and return a letter that represent if a letter was find.
         /// </summary>
         /// <param name="c">A char sent by the method step.</param>
         /// <returns>A boolean who represent if a letter was find.</returns>

@@ -187,7 +187,7 @@ namespace Botana
                             j1 = null;
                             j2 = null;
                         }
-                        if(morpion.isEnd)
+                        if (morpion.isEnd)
                         {
                             await message.Channel.SendMessageAsync("Égalité");
                             gameStarted = false;
