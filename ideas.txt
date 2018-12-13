@@ -28,5 +28,3 @@ La base de donné:
 			Supprimer un groupe:			
 
 	Les fiches persos: les lires.
-
-		

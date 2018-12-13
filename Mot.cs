@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Botana
@@ -15,10 +16,7 @@ namespace Botana
 
         private void fetchMot()
         {
-            System.Net.WebClient wc = new System.Net.WebClient();
-            string totalHtml = wc.DownloadString("https://www.motsqui.com/mots-aleatoires.php?Submit=Nouveau+mot");
-
-            value = Regex.Split(Regex.Split(totalHtml, "<b>")[1], "</b>")[0];
+            value = HtmlString.getHtmlString("https://www.motsqui.com/mots-aleatoires.php?Submit=Nouveau+mot", "<b>", "</b>");
         }
 
     }

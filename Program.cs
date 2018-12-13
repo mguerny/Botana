@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Rest;
 using Discord.WebSocket;
+using Supremes;
+using Supremes.Nodes;
+using Supremes.Parsers;
 
 namespace Botana
 {
@@ -87,7 +90,18 @@ namespace Botana
             {
                 Mot mot = new Mot();
                 await message.Channel.SendMessageAsync(mot.value);
+            }
 
+            if (message.Content == "!wedzcode")
+            {
+                Humor humor = new Humor();
+                await message.Channel.SendMessageAsync(humor.image);
+            }
+
+            if (message.Content == "!mariok")
+            {
+                string mariok = HtmlString.getHtmlString("http://www.insultron.fr", "40px;\">", "</font>");
+                await message.Channel.SendMessageAsync(mariok);
             }
 
             if (message.Content.StartsWith("!dés"))
@@ -234,4 +248,5 @@ namespace Botana
             return Task.CompletedTask;
         }
     }
+
 }
