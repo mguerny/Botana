@@ -22,7 +22,7 @@ namespace Botana
                 return answer;
             }
 
-            int throws = 1;         
+            int throws = 1;
 
             if (splited.Length > 2)
             {
@@ -32,27 +32,38 @@ namespace Botana
                 {
                     answer += "Le nombre de lancés doit être un nombre supérieur à 1.";
                 }
+                if (intermediaryThrow > 100)
+                {
+                    answer += "Woaw! Woaw! Calm down cow boy! You gonna throw it 100 times okay.";
+                    answer += Environment.NewLine;
+                    intermediaryThrow = 100;
+                }
                 throws = intermediaryThrow;
             }
-            
+
             int Faces = 0;
             bool isNumeric1 = int.TryParse(splited[1], out Faces);
 
             if (!isNumeric1 || Faces < 1)
             {
-                answer += "La commande doit être suivie d'un nombre supérieur à 1";
+                answer += "La commande doit être suivie d'un nombre supérieur à 1 et inférieur à 2147483647.";
             }
             else
+            if (Faces > 100000)
             {
-                for (int i = 0; i < throws; i++)
-                {
-                    Random rnd = new Random();
-                    int chiffre = rnd.Next(1, Faces + 1);
-                    answer += chiffre.ToString();
-                    answer += " ";
-                }
+                answer += "Best I can do is 100 000.";
+                answer += Environment.NewLine;
+                Faces = 100000;
             }
+            for (int i = 0; i < throws; i++)
+            {
+                Random rnd = new Random();
+                int chiffre = rnd.Next(1, Faces + 1);
+                answer += chiffre.ToString();
+                answer += " ";
+            }
+        
             return answer;
         }
-    }
+}
 }
