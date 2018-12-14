@@ -35,3 +35,25 @@ La base de donné:
 	Montrer la valeur ajouetr montrer la maitrise technique de la solucion.
 
 	Risque trés probable qu'on doive livrer les source plus tot (genre mardi).
+
+	Mettre en place plus propre:
+
+	MVC:
+	Model -> res
+
+	View -> Program.cs
+
+	Controleurs:
+	 -> Des.cs
+	 -> Help.cs
+	 -> Humour.cs
+	 -> Morpion.cs
+	 -> Mot.cs
+	 -> Pendu.cs
+	 -> RPGPlayer.cs 
+
+	 Autres:
+	 -> HtlmlString.cs -> Focntion intermédière
+	 -> MorpionPlayer.cs -> Model
+	 -> Remove.cs -> fonction intermédiare
+	 -> Stats.cs -> Model
