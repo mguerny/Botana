@@ -28,3 +28,10 @@ La base de donné:
 			Supprimer un groupe:			
 
 	Les fiches persos: les lires.
+
+
+	Preparer une présentation professionnel sur la démos.
+	On répond as un besoin. on présente la fonction. Si on as pas finis un truc on le montre pas.
+	Montrer la valeur ajouetr montrer la maitrise technique de la solucion.
+
+	Risque trés probable qu'on doive livrer les source plus tot (genre mardi).

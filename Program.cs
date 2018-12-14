@@ -81,6 +81,11 @@ namespace Botana
                 return;
             }
 
+            if (message.Content.StartsWith("!help")){
+                Help help = new Help(message.Content);
+                await message.Channel.SendMessageAsync(help.help);
+            }
+
             if (message.Content == "!ping")
             {
                 await message.Channel.SendMessageAsync("Pong!");
