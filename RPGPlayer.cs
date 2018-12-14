@@ -19,7 +19,7 @@ namespace Botana
         public RPGPlayer(string playerName)
         {
             
-            file = new System.IO.StreamReader(playerName + ".txt");
+            file = new System.IO.StreamReader("res/sheet/" + playerName + ".txt");
 
             string line;
             while ((line = file.ReadLine()) != null)

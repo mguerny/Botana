@@ -43,7 +43,7 @@ namespace Botana
 
             _client.Log += Log;
 
-            file = new System.IO.StreamReader("token.txt");
+            file = new System.IO.StreamReader("res/token.txt");
             string line = file.ReadLine();
             await _client.LoginAsync(TokenType.Bot, line);
             await _client.StartAsync();
