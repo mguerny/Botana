@@ -5,6 +5,8 @@ namespace Botana
 {
     public static class HtmlString
     {
+
+        /// Gets what is between -s1- and -s2- from the -url- html
         public static string getHtmlString(string url, string s1, string s2)
         {
             System.Net.WebClient wc = new System.Net.WebClient();

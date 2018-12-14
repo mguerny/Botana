@@ -6,13 +6,13 @@ namespace Botana
     internal class Humor
     {
 
-        public string image{get; private set;}
+        public string imageUrl{get; private set;}
 
         public Humor(){
-            setHumor();
+            fetchHumor();
         }
 
-        private void setHumor (){
+        private void fetchHumor (){
             
                 System.Net.WebClient wc = new System.Net.WebClient();
 
@@ -24,7 +24,7 @@ namespace Botana
                 Element result = doc.Select("img.single-media").First;
 
                 // get the 'src' attribute
-                image = result.Attr("src");
+                imageUrl = result.Attr("src");
 
         }
     }

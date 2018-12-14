@@ -10,10 +10,8 @@ namespace Botana
         List<Stat> stats = new List<Stat>();
         System.IO.StreamReader file;
 
-        // but : load les stats depuis un fichier texte qui s'appelerait "playerName".txt
-
         /// <summary>
-        /// This method will create a instance an RPG player by reading a txt.
+        /// Create an RPG player from a txt.
         /// </summary>
         /// <param name="playerName">A string with the name of the player.</param>
         public RPGPlayer(string playerName)
@@ -55,11 +53,7 @@ namespace Botana
 
         internal string display()
         {
-            if (!valid)
-            {
-                return "Stats invalides";
-            }
-            return displayStats();
+            return valid ? displayStats() : "Stats invalides";
         }
     }
 }

@@ -33,12 +33,16 @@ namespace Botana
         /// This method uses the letter sent by the user and the number of lifes to update the state of the game and return it.
         /// </summary>
         /// <param name="character">A char sent by the user.</param>
-        /// <returns>A string that represent the state of the game, "Perdu, ...', "Gagné ! ...!--" or empty if it's not win nor lose.</returns>
+        /// <returns>
+        /// A string that represents the state of the game,
+        /// "Perdu, ...', "Gagné ! ...!--" or "Égalité" if it's a draw.
+        /// </returns>
         public string step(char character)
         {
             liste.Add(character);
             string returnString = "";
-            // si pas de lettre trouvée, décrémente lifes
+
+            // if wrong proposition, decrease lifes
             lifes += reveal(character) ? 0 : -1;
 
             returnString += guess;
@@ -81,10 +85,10 @@ namespace Botana
         }
 
         /// <summary>
-        /// This method use the char sent by the user to update the guess and return a letter that represent if a letter was find.
+        /// Uses the char sent by the user to update the guess and returns a letter that represents if a letter was found.
         /// </summary>
         /// <param name="c">A char sent by the method step.</param>
-        /// <returns>A boolean who represent if a letter was find.</returns>
+        /// <returns>A boolean that represents if a letter was found.</returns>
         internal bool reveal(char c)
         {
             Boolean found = false;

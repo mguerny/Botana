@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -100,7 +100,7 @@ namespace Botana
             if (message.Content == "!wedzcode")
             {
                 Humor humor = new Humor();
-                await message.Channel.SendMessageAsync(humor.image);
+                await message.Channel.SendMessageAsync(humor.imageUrl);
             }
 
             if (message.Content == "!mariok")
@@ -173,11 +173,11 @@ namespace Botana
                 {
                     if (j1 == null)
                     {
-                        j1 = new MorpionPlayer(message.Author.Username);
+                        j1 = new MorpionPlayer(message.Author.Username, 1);
                     }
                     else
                     {
-                        j2 = new MorpionPlayer(message.Author.Username);
+                        j2 = new MorpionPlayer(message.Author.Username, 2);
                         gameStarted = true;
                         morpionStarted = true;
                         morpion = new Morpion(j1, j2);

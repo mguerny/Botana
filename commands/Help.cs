@@ -6,7 +6,8 @@ using System.Text.RegularExpressions;
 namespace Botana
 {
     /// <summary>
-    /// When we create an instance of this class, it create a string with all the commandes up to date.
+    /// Creates a string with all the commands,
+    /// or a precise one's description if it is specified.
     /// </summary>
     internal class Help
     {
@@ -66,10 +67,10 @@ namespace Botana
                 command["mot"] = "retourne un mot aléatoire.";
                 command["wedzcode"] = "affiche un meme sur l'informatique.";
                 command["mariok"] = "retourne une insulte aléatoire.";
-                command["dés"] = "doit être formulé de cette façons: \"!dés [1] [2]\" avec 1 le nombre de façes et 2 le nombre de lancés. (l'argument 2 est optionnel)";
+                command["dés"] = "doit être formulé de cette façons: \"!dés [1] [2]\" avec 1 le nombre de faces et 2 le nombre de lancés. (l'argument 2 est optionnel)";
                 command["rpg"] = " affiche la fiche perso d'un personnage.";
                 command["pendu"] = "lance un pendu.";
-                command["morpion"] = "lance un morpion une fois que 2 joueurs l'on tapé.";
+                command["morpion"] = "lance un morpion une fois que 2 joueurs l'on tapée.";
         }
     }
 }

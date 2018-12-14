@@ -2,11 +2,13 @@ namespace Botana
 {
     internal class MorpionPlayer
     {
-        public MorpionPlayer(string name)
+        public MorpionPlayer(string name, int value)
         {
-            discordName = name;
+            this.discordName = name;
+            this.value = value;
         }
 
         public string discordName { get; private set; }
+        public int value { get; private set; }
     }
 }

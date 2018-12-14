@@ -7,10 +7,12 @@ namespace Botana
     {
         /// <summary>
         /// This method takes the whole message that starts by: !dés [...] and extracts a number out of it. 
-        /// Then it sends a string that will be displayed by the bot.
+        /// Then it returns a string that will be displayed by the bot.
         /// </summary>
         /// <param name="message">A string sent by the user.</param>
-        /// <returns>A random number between 1 and the number sent by the user X time (with X the second argument(X init at 1)) or the instructions to use this method.</returns>
+        /// <returns>
+        /// A number between 1 and the first argument, done X times (second argument), or an error message
+        /// </returns>
         public static String random(string message)
         {
             string answer = "";
@@ -48,13 +50,13 @@ namespace Botana
             {
                 answer += "La commande doit être suivie d'un nombre supérieur à 1 et inférieur à 2147483647.";
             }
-            else
-            if (Faces > 100000)
+            else if (Faces > 100000)
             {
                 answer += "Best I can do is 100 000.";
                 answer += Environment.NewLine;
                 Faces = 100000;
             }
+
             for (int i = 0; i < throws; i++)
             {
                 Random rnd = new Random();
@@ -62,7 +64,7 @@ namespace Botana
                 answer += chiffre.ToString();
                 answer += " ";
             }
-            
+
             return answer;
         }
     }

@@ -8,7 +8,7 @@ namespace Botana
         MorpionPlayer j1;
         MorpionPlayer j2;
 
-        string current;
+        MorpionPlayer current;
 
         bool first = true;
         public bool isWon { get; private set; }
@@ -32,14 +32,29 @@ namespace Botana
             }
         }
 
-        internal string step(int content, string player)
+        /// <summary>
+        /// Makes the player's move, updates the game.
+        /// </summary>
+        /// <param name="content">A string sent by the user.</param>
+        /// <param name="playerName">The username</param>
+        /// <returns>
+        /// The string containing the visual display of the game,
+        /// or one of the error messages
+        /// </returns>
+        internal string step(int content, string playerName)
         {
             string returnString = "";
+
             if (first)
             {
-                if (player == j1.discordName || player == j2.discordName)
+                if (playerName == j1.discordName)
                 {
-                    current = player;
+                    current = j1;
+                    first = false;
+                }
+                if (playerName == j2.discordName)
+                {
+                    current = j2;
                     first = false;
                 }
             }
@@ -51,31 +66,31 @@ namespace Botana
                 returnString += "Quelqu'un a déjà joué ici :angry:" + Environment.NewLine;
                 returnString += display();
             }
-            else if (player != current)
+            else if (playerName != current.discordName)
             {
                 returnString += "Ce n'est pas à vous de jouer !" + Environment.NewLine;
                 returnString += display();
             }
             else
             {
-                array[positions[0], positions[1]] = (current == j1.discordName) ? 1 : 2;
-                current = (current == j1.discordName) ? j2.discordName : j1.discordName;
+                array[positions[0], positions[1]] = current.value;
+                current = (current == j1) ? j2 : j1;
                 returnString += display();
             }
 
             isWon = getWon();
-            isEnd = getEnd() && !isWon;
+            isEnd = getDraw() && !isWon;
 
             return returnString;
         }
 
-        private bool getEnd()
+        private bool getDraw()
         {
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if(array[i, j] == 0)
+                    if (array[i, j] == 0)
                     {
                         return false;
                     }
@@ -140,9 +155,12 @@ namespace Botana
             }
 
             return false;
-
         }
 
+        /// <summary>
+        /// Creates a string of emoji names from the values array
+        /// to create a nice display in discord
+        /// </summary>
         internal string display()
         {
             string toDisplay = "";
@@ -158,6 +176,10 @@ namespace Botana
             return toDisplay;
         }
 
+
+        /// <summary>
+        /// Transforms the numpad value to x and y coordinates
+        /// </summary>
         private int[] parsePositions(int content)
         {
             int row = 2 - (content - 1) / 3;
