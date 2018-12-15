@@ -34,6 +34,24 @@ namespace Botana
 
         public static void Main(string[] args)
         {
+            /* */
+            /*
+            using (var db = new RPGContext())
+            {
+                 
+                db.Games.Add(new Game { GameName = "Pathfinder" });
+                var count = db.SaveChanges();
+                Console.WriteLine("{0} records saved to database", count);
+
+                Console.WriteLine();
+                Console.WriteLine("All games in database:");
+                foreach (var game in db.Games)
+                {
+                    Console.WriteLine(" - {0}", game.GameName);
+                }
+            }
+            */
+            /* */
             new Program().MainAsync().GetAwaiter().GetResult();
         }
 
@@ -81,7 +99,8 @@ namespace Botana
                 return;
             }
 
-            if (message.Content.StartsWith("!help")){
+            if (message.Content.StartsWith("!help"))
+            {
                 Help help = new Help(message.Content);
                 await message.Channel.SendMessageAsync(help.help);
             }
@@ -135,6 +154,12 @@ namespace Botana
                         await message.Channel.SendMessageAsync("Joueur inconnu");
                     }
                 }
+            }
+
+            if (message.Content.StartsWith("!jdr"))
+            {
+                await message.Channel.SendMessageAsync("Poungy!");
+                await message.Channel.SendMessageAsync(Jdr.group(message.Content));
             }
 
             if ((message.Content.StartsWith("!pendu") && !gameStarted) || penduStarted)

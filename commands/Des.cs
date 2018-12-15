@@ -32,11 +32,11 @@ namespace Botana
                 bool isNumeric2 = int.TryParse(splited[2], out intermediaryThrow);
                 if (!isNumeric2 || intermediaryThrow < 1)
                 {
-                    answer += "Le nombre de lancés doit être un nombre supérieur à 1.";
+                    answer += "Le nombre de lancés doit être un nombre supérieur à 1 et inférieur à 2147483647.";
                 }
                 if (intermediaryThrow > 100)
                 {
-                    answer += "Woaw! Woaw! Calm down cow boy! You gonna throw it 100 times okay.";
+                    answer += "Woaw! Woaw! On se calme! Tu vas le lancer 100 fois okay.";
                     answer += Environment.NewLine;
                     intermediaryThrow = 100;
                 }
