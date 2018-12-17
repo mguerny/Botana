@@ -7,7 +7,6 @@ namespace Botana
     {
         public DbSet<Game> Games { get; set; }
         public DbSet<Player> Players { get; set; }
-
         public DbSet<Sheet> Sheets { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

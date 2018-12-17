@@ -29,6 +29,10 @@ namespace Botana
                         answer = supprimer(splited);
                         break;
 
+                    case "modifier":
+                        answer = modifier(splited);
+                        break;
+
                     default:
                         answer = "Commande inconue.";
                         break;
@@ -44,150 +48,186 @@ namespace Botana
         public static String afficher(string[] splited)
         {
             String answer = "";
-            if (splited.Length > 2)
+            using (var db = new RPGContext())
             {
-                int gameID = 0;
-                try
+                if (splited.Length > 2)
                 {
-                    gameID = int.Parse(splited[2]);
-                }
-                catch (Exception)
-                {
-                    return "Besoin de l'ID d'un jdr connu séparé d'un espace après le !jdr ajouter .";
-                }
+                    int gameID = 0;
 
-                using (var db = new RPGContext())
-                {
-                    foreach (var game in db.Games)
+                    try
                     {
-                        if (gameID == game.GameId)
-                        {
-                            answer += "Voici les informaions sur le jdr: " + game.GameId + Environment.NewLine;
-                            answer += "Nom du Jdr : " + game.GameName + Environment.NewLine;
-                            answer += "Nom du MJ : " + ((game.GameMaster != null) ? game.GameMaster : "Pas de MJ" ) + Environment.NewLine;
-                            answer += "Liste des joeurs : " + Environment.NewLine;
-                            if (game.GamePlayer != null)
-                            {
-                                foreach (var player in game.GamePlayer)
-                                {
-                                    answer += "numéro du joueur : " + player.PlayerId + "; nom du joueur : " + player.PlayerName + Environment.NewLine;
-                                }
-                            }
-                            else {
-                                answer += "Pas de joueur";
-                            }
-                        }
+                        gameID = int.Parse(splited[2]);
+                    }
+                    catch (Exception)
+                    {
+                        return "Besoin de l'ID d'un jdr connu séparé d'un espace après le !jdr afficher.";
+                    }
+
+                    var game = db.Games.Find(gameID);
+                    if (game != null)
+                    {
+                        answer += "Voici les informaions sur le jdr: " + game.GameId + Environment.NewLine;
+                        answer += "Nom du Jdr : " + game.GameName + Environment.NewLine;
+                        answer += "Nom du MJ : " + ((game.GameMaster != null) ? game.GameMaster : "Pas de MJ") + Environment.NewLine;
+                    }
+                    else
+                    {
+                        answer = "Besoin de l'ID d'un jdr connu séparé d'un espace après le !jdr afficher.";
                     }
                 }
-            }
-            else
-            {
-                answer += "Voici la liste des jdr actuel:" + Environment.NewLine;
-                using (var db = new RPGContext())
+
+                else
                 {
+                    answer += "Voici la liste des jdr actuel:" + Environment.NewLine;
+
                     foreach (var game in db.Games)
                     {
                         answer += game.GameId + " : " + game.GameName + Environment.NewLine;
                     }
                 }
             }
-
             return answer;
         }
 
-        public static String ajouter(string[] splited)
+        public static String ajouter(String[] splited)
+        {
+            string answer = "";
+            if (splited.Length > 2)
+            {
+                using (var db = new RPGContext())
+                {
+                    db.Games.Add(new Game { GameName = splited[2] });
+                    var count = db.SaveChanges();
+                    Console.WriteLine("{0} records saved to database", count);
+                    answer = "Le jdr : " + splited[2] + " à était ajouté à la base donée.";
+                }
+            }
+            else
+            {
+                answer = "Besoin du nom du jdr à créer aprés !jdr ajouter ";
+
+            }
+            return answer;
+        }
+
+        public static String supprimer(String[] splited)
+        {
+            string answer = "";
+            if (splited.Length > 2)
+            {
+                using (var db = new RPGContext())
+                {
+                    int gameID = 0;
+
+                    try
+                    {
+                        gameID = int.Parse(splited[2]);
+                    }
+                    catch (Exception)
+                    {
+                        return "Besoin de l'ID d'un jdr connu séparé d'un espace après le !jdr afficher.";
+                    }
+
+                    var game = db.Games.Find(gameID);
+                    Console.WriteLine("remove game");
+                    db.Games.Remove(game);
+                    Console.WriteLine("save change");
+                    var count = db.SaveChanges();
+                    Console.WriteLine("{0} records delete to database", count);
+                    answer = "Le jdr : " + splited[2] + " à était supprimé de la base donée.";
+                }
+            }
+            else
+            {
+                answer = "Besoin de l'ID d'un jdr connu séparé d'un espace après le !jdr supprimer.";
+
+            }
+            return answer;
+        }
+
+        public static String modifier(string[] splited)
         {
             String answer = "";
             if (splited.Length > 2)
             {
-                String gameName = splited[2];
-                //Afficher le jdr demendé, avec le MJ et les joueurs.
-                answer += "A";
+                using (var db = new RPGContext())
+                {
+                    int gameID = 0;
+
+                    try
+                    {
+                        gameID = int.Parse(splited[2]);
+                    }
+                    catch (Exception)
+                    {
+                        return "Besoin de l'ID d'un jdr connu séparé d'un espace après le !jdr afficher.";
+                    }
+
+                    if (splited.Length > 3)
+                    {
+                        switch (splited[3])
+                        {
+                            case "nom":
+                                answer += modif(splited, gameID, true);
+                                break;
+                            case "mj":
+                                answer += modif(splited, gameID, false);
+                                break;
+                            default:
+                                answer = "Besoin d'un type de modification connu (soit name, soit mj) séparé d'un espace après le !jdr modifier .";
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        answer = "Besoin d'un type de modification (soit name, soit mj) séparé d'un espace après le !jdr modifier .";
+                    }
+                }
             }
             else
             {
-                answer = "Besoin du nom d'un jdr séparé d'un espace après le !jdr ajouter .";
+                answer = "Besoin de l'ID d'un jdr connu séparé d'un espace après le !jdr modifier .";
             }
-
             return answer;
         }
 
-        public static String supprimer(string[] splited)
+        public static String modif(String[] splited, int GameID, bool isName)
         {
             String answer = "";
-            if (splited.Length > 2)
+            if (splited.Length > 4)
             {
-                String gameName = splited[2];
-                //Afficher le jdr demendé, avec le MJ et les joueurs.
-                answer += "A";
+                using (var db = new RPGContext())
+                {
+                    var game = db.Games.Find(GameID);
+                    if (isName)
+                    {
+                        game.GameName = splited[4];
+                        answer += "Le nom du jdr : " + GameID + " à était mis à jour.";
+                    }
+                    else
+                    {
+                        game.GameMaster = splited[4];
+                        answer += "Le nom du mj du jdr : " + GameID + " à était mis à jour."; ;
+                    }
+                    var count = db.SaveChanges();
+                    Console.WriteLine("{0} records saved to database", count);
+                }
             }
             else
             {
-                answer = "Besoin du nom d'un jdr séparé d'un espace après le !jdr ajouter .";
+                answer = "Besoin du nom.";
             }
-
-            return answer; ;
+            return answer;
         }
     }
 }
-/*if (commandName.Equals("afficher"))
+
+/* Convert plus jolie: #endregionint num;
+if (int.TryParse(monstring, out num))
 {
-    if (splited.Length > 2)
-    {
-        String gameName = splited[2];
-        //Afficher le jdr demendé, avec le MJ et les joueurs.
-    }
-    else
-    {
-        //Afficher tous les noms de jdr.
-    }
+// code si conversion OK
 }
-
-else if (commandName.Equals("ajouter"))
-{
-    if (splited.Length > 2)
-    {
-        String gameName = splited[2];
-        //Créer le jdr demendé, avec le MJ et les joueurs.
-        if (splited.Length > 3){
-            String playerType = splited[3];
-            if(splited.Length > 4){
-                String playerName = splited[4];
-                // Test si jdr existe
-                    //Test si bon type de joueur
-
-            }
-            else{
-                return "Besoin du nom du joueur séparé d'un espace après le !jdr ajouter 'nom du jdr' 'type de joueur' .";
-            }
-        }
-        else{
-            return "Besoin du nom du type du joueur séparé d'un espace après le !jdr ajouter 'nom du jdr' .";
-        }
-    }
-    else
-    {
-        return "Besoin du nom d'un jdr séparé d'un espace après le !jdr ajouter .";
-    }
-}
-
-else if (commandName.Equals("supprimer"))
-{
-    if (splited.Length > 2)
-    {
-        String gameName = splited[2];
-        //Supprime le jdr demendé.
-    }
-    else
-    {
-        return "Besoin du nom d'un jdr séparé d'un espace après le !jdr supprimer .";
-    }
-}
-
 else
 {
-    return "Commande inconue.";
-}
-}
-
-*/
+// code si conversion KO
+} */
