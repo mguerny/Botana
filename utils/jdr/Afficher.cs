@@ -5,6 +5,11 @@ namespace Botana
 {
     internal class Afficher
     {
+        /// <summary>
+        /// This fonction display all rpg in the database, or the detail of one rpg if we precise the ID.
+        /// </summary>
+        /// <param name="splited">the table of string send by the fonction group.</param>
+        /// <returns>The string who will be show on discord.</returns>
         public static String afficher(string[] splited)
         {
             String answer = "";

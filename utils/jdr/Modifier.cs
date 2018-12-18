@@ -5,6 +5,12 @@ namespace Botana
 {
     internal class Modifier
     {
+        /// <summary>
+        /// This fonction manages the message and redirect on the appropriate fonction with some tests to check if the command
+        /// is good.
+        /// </summary>
+        /// <param name="splited">the table of string send by the fonction group.</param>
+        /// <returns>The string who will be show on discord.</returns>
         public static String modifier(string[] splited)
         {
             String answer = "";
@@ -27,13 +33,13 @@ namespace Botana
                                     answer += modif(splited, gameID, false);
                                     break;
                                 default:
-                                    answer = "Besoin d'un type de modification connu (soit nom, soit mj) séparé d'un espace après le !jdr modifier .";
+                                    answer = "Besoin d'un type de modification connu (soit nom, soit mj) séparé d'un espace après le !jdr modifier 'ID du jdr'.";
                                     break;
                             }
                         }
                         else
                         {
-                            answer = "Besoin de l'ID d'un jdr connu et d'un type de moification connu séparé d'un espace après le !jdr modifier.";
+                            answer = "Besoin de l'ID d'un jdr connu puis d'un type de modification connu séparé d'un espace après le !jdr modifier.";
                         }
                     }
                     else
@@ -44,11 +50,18 @@ namespace Botana
             }
             else
             {
-                answer = "Besoin de l'ID d'un jdr connu séparé d'un espace après le !jdr modifier .";
+                answer = "Besoin de l'ID d'un jdr séparé d'un espace après le !jdr modifier .";
             }
             return answer;
         }
 
+        /// <summary>
+        /// This fonction change the desired value. With some test and a choose made by isName.
+        /// </summary>
+        /// <param name="splited">the table of string send by the fonction group.</param>
+        /// <param name="GameID">The integer of the rpg to change.</param>
+        /// <param name="isName">Is use to chosse if we want to change the name of the game or the gm.</param>
+        /// <returns>The string who will be show on discord.</returns>
         public static String modif(String[] splited, int GameID, bool isName)
         {
             String answer = "";

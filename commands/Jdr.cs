@@ -5,6 +5,11 @@ namespace Botana
 {
     internal class Jdr
     {
+        /// <summary>
+        /// This fonction manages the message and redirect on the appropriate fonction.
+        /// </summary>
+        /// <param name="message">The string sent by the user.</param>
+        /// <returns>The string who will be show on discord.</returns>
         public static String group(string message)
         {
 
@@ -46,12 +51,3 @@ namespace Botana
         }
     }
 }
-/* Convert plus jolie: #endregionint num;
-if (int.TryParse(monstring, out num))
-{
-// code si conversion OK
-}
-else
-{
-// code si conversion KO
-} */

@@ -5,6 +5,11 @@ namespace Botana
 {
     internal class Supprimer
     {
+        /// <summary>
+        /// This fonction delet the rpg that have the ID find in the table of strings.
+        /// </summary>
+        /// <param name="splited">the table of string send by the fonction group.</param>
+        /// <returns>The string who will be show on discord.</returns>
         public static String supprimer(String[] splited)
         {
             string answer = "";
@@ -37,7 +42,7 @@ namespace Botana
             }
             else
             {
-                answer = "Besoin de l'ID d'un jdr connu séparé d'un espace après le !jdr supprimer.";
+                answer = "Besoin de l'ID d'un jdr séparé d'un espace après le !jdr supprimer.";
             }
             return answer;
         }
