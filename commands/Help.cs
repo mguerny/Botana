@@ -31,6 +31,10 @@ namespace Botana
             if (splited.Length > 1)
             {
                 String commandName = splited[1];
+                if (splited.Length > 2)
+                {
+                    commandName += " " + splited[2];
+                }
                 String instruction = "";
 
                 if (command.TryGetValue(commandName, out instruction))
@@ -54,7 +58,7 @@ namespace Botana
 
                 foreach (string s in keycommand)
                 {
-                    help += "!"+ s ;
+                    help += "!" + s;
                     help += Environment.NewLine;
                 }
             }
@@ -63,14 +67,19 @@ namespace Botana
 
         public void InitCommand()
         {
-                command["ping"] = "teste si le Bot est en ligne.";
-                command["mot"] = "retourne un mot aléatoire.";
-                command["wedzcode"] = "affiche un meme sur l'informatique.";
-                command["mariok"] = "retourne une insulte aléatoire.";
-                command["dés"] = "doit être formulé de cette façons: \"!dés [1] [2]\" avec 1 le nombre de faces et 2 le nombre de lancés. (l'argument 2 est optionnel)";
-                command["rpg"] = " affiche la fiche perso d'un personnage.";
-                command["pendu"] = "lance un pendu.";
-                command["morpion"] = "lance un morpion une fois que 2 joueurs l'on tapée.";
+            command["ping"] = "teste si le Bot est en ligne.";
+            command["mot"] = "retourne un mot aléatoire.";
+            command["wedzcode"] = "affiche un meme sur l'informatique.";
+            command["mariok"] = "retourne une insulte aléatoire.";
+            command["dés"] = "doit être formulé de cette façons: \"!dés [1] [2]\" avec 1 le nombre de faces et 2 le nombre de lancés. (l'argument 2 est optionnel)";
+            command["rpg"] = " affiche la fiche perso d'un personnage.";
+            command["pendu"] = "lance un pendu.";
+            command["morpion"] = "lance un morpion une fois que 2 joueurs l'on tapée.";
+            command["jdr"] = "permet de gérer une base de données. 4 commande disponible après !jdr: afficher, ajouter, modifier, supprimer.";
+            command["jdr afficher"] = "affiche la liste des jdr actuel ou les détails d'un jdr si on rajoute l'ID de celui ci après la commande.";
+            command["jdr ajouter"] = "ajoute un jdr nommé par l'argument après la commande.";
+            command["jdr modifier"] = "modifie le nom du jdr ou de son MJ.";
+            command["jdr supprimer"] = "supprime un jdr si donne l'ID de celui ci après la commande.";
         }
     }
 }

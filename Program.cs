@@ -34,24 +34,6 @@ namespace Botana
 
         public static void Main(string[] args)
         {
-            /* */
-            /*
-            using (var db = new RPGContext())
-            {
-                 
-                db.Games.Add(new Game { GameName = "Pathfinder" });
-                var count = db.SaveChanges();
-                Console.WriteLine("{0} records saved to database", count);
-
-                Console.WriteLine();
-                Console.WriteLine("All games in database:");
-                foreach (var game in db.Games)
-                {
-                    Console.WriteLine(" - {0}", game.GameName);
-                }
-            }
-            */
-            /* */
             new Program().MainAsync().GetAwaiter().GetResult();
         }
 
@@ -158,7 +140,6 @@ namespace Botana
 
             if (message.Content.StartsWith("!jdr"))
             {
-                await message.Channel.SendMessageAsync("Poungy!");
                 await message.Channel.SendMessageAsync(Jdr.group(message.Content));
             }
 
