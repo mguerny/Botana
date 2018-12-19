@@ -56,6 +56,8 @@ namespace Botana
             {
                 returnString += "\n";
                 returnString += "Perdu, tu n'as plus de vies ...";
+                returnString += Environment.NewLine;
+                returnString += "Le mot était \"" + mot.value + "\"";
             }
             if (isWon)
             {
