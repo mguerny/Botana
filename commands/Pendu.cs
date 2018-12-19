@@ -30,7 +30,7 @@ namespace Botana
             }
         }
         /// <summary>
-        /// This method uses the letter sent by the user and the number of lifes to update the state of the game and return it.
+        /// Uses the letter sent by the user and the number of lifes to update the state of the game and return it.
         /// </summary>
         /// <param name="character">A char sent by the user.</param>
         /// <returns>

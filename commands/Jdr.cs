@@ -6,10 +6,10 @@ namespace Botana
     internal class Jdr
     {
         /// <summary>
-        /// This fonction manages the message and redirect on the appropriate fonction.
+        /// Manages the message and redirects to the appropriate function.
         /// </summary>
         /// <param name="message">The string sent by the user.</param>
-        /// <returns>The string who will be show on discord.</returns>
+        /// <returns>The string that will be shown on discord.</returns>
         public static String group(string message)
         {
 
@@ -39,7 +39,7 @@ namespace Botana
                         break;
 
                     default:
-                        answer = "Commande inconue. (Liste des commandes: afficher, ajouter, supprimer, modifier";
+                        answer = "Commande inconue. (Liste des commandes: afficher, ajouter, supprimer, modifier)";
                         break;
                 }
             }

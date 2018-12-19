@@ -6,11 +6,11 @@ namespace Botana
     internal class Modifier
     {
         /// <summary>
-        /// This fonction manages the message and redirect on the appropriate fonction with some tests to check if the command
-        /// is good.
+        /// Manages the message and redirects to the appropriate function 
+        /// with some tests to check if the command is good.
         /// </summary>
-        /// <param name="splited">the table of string send by the fonction group.</param>
-        /// <returns>The string who will be show on discord.</returns>
+        /// <param name="splited">The table of strings sent by the group function.</param>
+        /// <returns>The string that will be shown on discord.</returns>
         public static String modifier(string[] splited)
         {
             String answer = "";
@@ -33,7 +33,7 @@ namespace Botana
                                     answer += modif(splited, gameID, false);
                                     break;
                                 default:
-                                    answer = "Besoin d'un type de modification connu (soit nom, soit mj) séparé d'un espace après le !jdr modifier 'ID du jdr'.";
+                                    answer = "Besoin d'un type de modification connu (soit nom, soit mj) séparé d'un espace après le !jdr modifier -id-.";
                                     break;
                             }
                         }
@@ -56,12 +56,12 @@ namespace Botana
         }
 
         /// <summary>
-        /// This fonction change the desired value. With some test and a choose made by isName.
+        /// Changes the desired value. With some tests and a choice made by isName.
         /// </summary>
-        /// <param name="splited">the table of string send by the fonction group.</param>
+        /// <param name="splited">The table of string send by the group function.</param>
         /// <param name="GameID">The integer of the rpg to change.</param>
-        /// <param name="isName">Is use to chosse if we want to change the name of the game or the gm.</param>
-        /// <returns>The string who will be show on discord.</returns>
+        /// <param name="isName">Is used to choose if we want to change the name of the game or the gm.</param>
+        /// <returns>The string that will be shown on discord.</returns>
         public static String modif(String[] splited, int GameID, bool isName)
         {
             String answer = "";
@@ -73,12 +73,12 @@ namespace Botana
                     if (isName)
                     {
                         game.GameName = splited[4];
-                        answer += "Le nom du jdr : " + GameID + " à était mis à jour.";
+                        answer += "Le nom du jdr : " + GameID + " a été mis à jour.";
                     }
                     else
                     {
                         game.GameMaster = splited[4];
-                        answer += "Le nom du mj du jdr : " + GameID + " à était mis à jour."; ;
+                        answer += "Le nom du mj du jdr : " + GameID + " a été mis à jour."; ;
                     }
                     var count = db.SaveChanges();
                     Console.WriteLine("{0} records saved to database", count);
@@ -86,7 +86,7 @@ namespace Botana
             }
             else
             {
-                answer = "Besoin du nom.";
+                answer = "Besoin du nom du jdr ou du mj.";
             }
             return answer;
         }

@@ -39,9 +39,11 @@ namespace Botana
 
                 if (command.TryGetValue(commandName, out instruction))
                 {
-                    help = "L'explication pour la commande !" + commandName + " est:";
+                    help = "-argument- : obligatoire";
                     help += Environment.NewLine;
-                    help += "La commande ";
+                    help += "<argument> : optionnel";
+                    help += Environment.NewLine;
+                    help += "!" + commandName;
                     help += instruction;
                 }
                 else
@@ -68,18 +70,18 @@ namespace Botana
         public void InitCommand()
         {
             command["ping"] = "teste si le Bot est en ligne.";
-            command["mot"] = "retourne un mot aléatoire.";
+            command["mot"] = " <phrase> retourne un mot aléatoire (ne prend pas la phrase <phrase> en compte).";
             command["wedzcode"] = "affiche un meme sur l'informatique.";
             command["mariok"] = "retourne une insulte aléatoire.";
-            command["dés"] = "doit être formulé de cette façons: \"!dés [1] [2]\" avec 1 le nombre de faces et 2 le nombre de lancés. (l'argument 2 est optionnel)";
-            command["rpg"] = " affiche la fiche perso d'un personnage.";
+            command["dés"] = " -nombre- <lancés> Lance 1 ou <lancés> dés de -nombre- faces";
+            command["rpg"] = " -nom- affiche la fiche perso d'un personnage.";
             command["pendu"] = "lance un pendu.";
             command["morpion"] = "lance un morpion une fois que 2 joueurs l'on tapée.";
             command["jdr"] = "permet de gérer une base de données. 4 commande disponible après !jdr: afficher, ajouter, modifier, supprimer.";
-            command["jdr afficher"] = "affiche la liste des jdr actuel ou les détails d'un jdr si on rajoute l'ID de celui ci après la commande.";
-            command["jdr ajouter"] = "ajoute un jdr nommé par l'argument après la commande.";
-            command["jdr modifier"] = "modifie le nom du jdr ou de son MJ.";
-            command["jdr supprimer"] = "supprime un jdr si donne l'ID de celui ci après la commande.";
+            command["jdr afficher"] = " -id- affiche la liste des jdr actuels ou les détails d'un jdr si on rajoute l'ID <id> du jdr.";
+            command["jdr ajouter"] = " -nom- ajoute un jdr nommé -nom-.";
+            command["jdr modifier"] = "  -'nom'/'mj'- -nom- modifie le nom -nom- du jdr ou de son MJ.";
+            command["jdr supprimer"] = " -id- supprime un jdr si l'ID -id- est valide.";
         }
     }
 }

@@ -6,10 +6,10 @@ namespace Botana
     internal class Supprimer
     {
         /// <summary>
-        /// This fonction delet the rpg that have the ID find in the table of strings.
+        /// Deletes the rpg that have the ID found in the table of strings.
         /// </summary>
-        /// <param name="splited">the table of string send by the fonction group.</param>
-        /// <returns>The string who will be show on discord.</returns>
+        /// <param name="splited">The table of strings sendtby the group function.</param>
+        /// <returns>The string that will be shown on discord.</returns>
         public static String supprimer(String[] splited)
         {
             string answer = "";
@@ -26,8 +26,8 @@ namespace Botana
                         {
                             db.Games.Remove(game);
                             var count = db.SaveChanges();
-                            Console.WriteLine("{0} records delete to database", count);
-                            answer = "Le jdr : " + splited[2] + " à était supprimé de la base donées.";
+                            Console.WriteLine("{0} records deleted from database", count);
+                            answer = "Le jdr : " + splited[2] + " a été supprimé de la base donées.";
                         }
                         else
                         {
@@ -36,7 +36,7 @@ namespace Botana
                     }
                     else
                     {
-                        return "Besoin de l'ID d'un jdr connu séparé d'un espace après le !jdr afficher.";
+                        return "Besoin de l'ID d'un jdr connu séparé d'un espace après le !jdr supprimer.";
                     }
                 }
             }

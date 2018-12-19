@@ -6,10 +6,10 @@ namespace Botana
     internal class Afficher
     {
         /// <summary>
-        /// This fonction display all rpg in the database, or the detail of one rpg if we precise the ID.
+        /// Displays all rpgs in the database, or the detail of one rpg if we precise the ID.
         /// </summary>
-        /// <param name="splited">the table of string send by the fonction group.</param>
-        /// <returns>The string who will be show on discord.</returns>
+        /// <param name="splited">The table of string send by the group function.</param>
+        /// <returns>The string that will be shown on discord.</returns>
         public static String afficher(string[] splited)
         {
             String answer = "";
@@ -24,7 +24,7 @@ namespace Botana
                         var game = db.Games.Find(gameID);
                         if (game != null)
                         {
-                            answer += "Voici les informaions sur le jdr: " + game.GameId + Environment.NewLine;
+                            answer += "Voici les informations sur le jdr: " + game.GameId + Environment.NewLine;
                             answer += "Nom du Jdr : " + game.GameName + Environment.NewLine;
                             answer += "Nom du MJ : " + ((game.GameMaster != null) ? game.GameMaster : "Pas de MJ") + Environment.NewLine;
                         }
@@ -40,7 +40,7 @@ namespace Botana
                 }
                 else
                 {
-                    answer += "Voici la liste des jdr actuel:" + Environment.NewLine;
+                    answer += "Voici la liste des jdr actuels:" + Environment.NewLine;
 
                     foreach (var game in db.Games)
                     {

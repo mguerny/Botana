@@ -6,7 +6,7 @@ namespace Botana
     internal class Des
     {
         /// <summary>
-        /// This method takes the whole message that starts by: !dés [...] and extracts a number out of it. 
+        /// Takes the whole message that starts by: !dés [...] and extracts a number out of it. 
         /// Then it returns a string that will be displayed by the bot.
         /// </summary>
         /// <param name="message">A string sent by the user.</param>

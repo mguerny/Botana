@@ -11,7 +11,7 @@ namespace Botana
         System.IO.StreamReader file;
 
         /// <summary>
-        /// Create an RPG player from a txt.
+        /// Creates an RPG player from a txt file.
         /// </summary>
         /// <param name="playerName">A string with the name of the player.</param>
         public RPGPlayer(string playerName)
