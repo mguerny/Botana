@@ -1,7 +1,7 @@
 
-\.vscode/
-
 bin/Debug/netcoreapp2\.1/
+
+\.vscode/
 
 Botana\.csproj
 

@@ -156,11 +156,12 @@ namespace Botana
                 {
                     if (message.Content.Length > 1 || !Char.IsLetter(message.Content[0]))
                     {
-                        penduDisplay = await updateGame(pendu, penduDisplay, message, null);
+                        await updatePendu(message, null);
                     }
                     else
                     {
-                        penduDisplay = await updateGame(pendu, penduDisplay, message, pendu.step(message.Content[0]));
+                        string toDisplay = pendu.step(message.Content[0]);
+                        await updatePendu(message, toDisplay);
                         await message.DeleteAsync();
 
                         if (pendu.isFinished || pendu.isWon)
@@ -197,11 +198,11 @@ namespace Botana
 
                     if (!isNumeric || n < 1 || n > 9)
                     {
-                        morpionDisplay = await updateGame(morpion, morpionDisplay, message, null);
+                        await updateMorpion(message, null);
                     }
                     else
                     {
-                        morpionDisplay = await updateGame(morpion, morpionDisplay, message, morpion.step(n, message.Author.Username));
+                        await updateMorpion(message, morpion.step(n, message.Author.Username));
                         await message.DeleteAsync();
                         if (morpion.isWon)
                         {
@@ -226,18 +227,30 @@ namespace Botana
             }
         }
 
-        private async Task<RestUserMessage> updateGame(IDisplayable game, RestUserMessage gameMessage, SocketMessage message, string toDisplay)
+        private async Task updateMorpion(SocketMessage message, string toDisplay)
         {
-            await gameMessage.DeleteAsync();
+            await morpionDisplay.DeleteAsync();
             if (toDisplay == null)
             {
-                gameMessage = await message.Channel.SendMessageAsync(game.display());
+                morpionDisplay = await message.Channel.SendMessageAsync(morpion.display());
             }
             else
             {
-                gameMessage = await message.Channel.SendMessageAsync(toDisplay);
+                morpionDisplay = await message.Channel.SendMessageAsync(toDisplay);
             }
-            return gameMessage;
+        }
+
+        private async Task updatePendu(SocketMessage message, string toDisplay)
+        {
+            await penduDisplay.DeleteAsync();
+            if (toDisplay == null)
+            {
+                penduDisplay = await message.Channel.SendMessageAsync(pendu.display());
+            }
+            else
+            {
+                penduDisplay = await message.Channel.SendMessageAsync(toDisplay);
+            }
         }
 
         private Task Log(LogMessage msg)

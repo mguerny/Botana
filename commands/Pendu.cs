@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Botana
 {
-    internal class Pendu : IDisplayable
+    internal class Pendu
     {
         public int lifes { get; private set; }
         public Boolean isFinished { get; private set; }
