@@ -39,9 +39,7 @@ namespace Botana
 
                 if (command.TryGetValue(commandName, out instruction))
                 {
-                    help = "-argument- : obligatoire";
-                    help += Environment.NewLine;
-                    help += "<argument> : optionnel";
+                    help = "<argument> : optionnel";
                     help += Environment.NewLine;
                     help += "!" + commandName;
                     help += instruction;
@@ -72,16 +70,8 @@ namespace Botana
             command["ping"] = "teste si le Bot est en ligne.";
             command["mot"] = " <phrase> retourne un mot aléatoire (ne prend pas la phrase <phrase> en compte).";
             command["wedzcode"] = "affiche un meme sur l'informatique.";
-            command["mariok"] = "retourne une insulte aléatoire.";
-            command["dés"] = " -nombre- <lancés> Lance 1 ou <lancés> dés de -nombre- faces";
-            command["rpg"] = " -nom- affiche la fiche perso d'un personnage.";
             command["pendu"] = "lance un pendu.";
             command["morpion"] = "lance un morpion une fois que 2 joueurs l'on tapée.";
-            command["jdr"] = "permet de gérer une base de données. 4 commande disponible après !jdr: afficher, ajouter, modifier, supprimer.";
-            command["jdr afficher"] = " -id- affiche la liste des jdr actuels ou les détails d'un jdr si on rajoute l'ID <id> du jdr.";
-            command["jdr ajouter"] = " -nom- ajoute un jdr nommé -nom-.";
-            command["jdr modifier"] = "  -'nom'/'mj'- -nom- modifie le nom -nom- du jdr ou de son MJ.";
-            command["jdr supprimer"] = " -id- supprime un jdr si l'ID -id- est valide.";
         }
     }
 }

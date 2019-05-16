@@ -67,7 +67,7 @@ namespace Botana
                 return;
             }
 
-            bool allowedChannel = false;
+            bool allowedChannel = true;
             foreach (string line in channels)
             {
                 if (message.Channel.Id == ulong.Parse(line))
@@ -89,7 +89,7 @@ namespace Botana
 
             if (message.Content == "!ping")
             {
-                await message.Channel.SendMessageAsync("Pong!");
+                await message.Channel.SendMessageAsync("Raspy Pong!");
             }
 
             if (message.Content.StartsWith("!mot"))
@@ -102,45 +102,6 @@ namespace Botana
             {
                 Humor humor = new Humor();
                 await message.Channel.SendMessageAsync(humor.imageUrl);
-            }
-
-            if (message.Content == "!mariok")
-            {
-                string mariok = HtmlString.getHtmlString("http://www.insultron.fr", "40px;\">", "</font>");
-                await message.Channel.SendMessageAsync(mariok);
-            }
-
-            if (message.Content.StartsWith("!dés"))
-            {
-                await message.Channel.SendMessageAsync(Des.random(message.Content));
-            }
-
-            if (message.Content.StartsWith("!rpg"))
-            {
-                string[] input = message.Content.Split(" ");
-                if (input.Length != 2)
-                {
-                    await message.Channel.SendMessageAsync("Commande invalide");
-                }
-                else
-                {
-                    string playerName = input[1];
-                    RPGPlayer rpg;
-                    try
-                    {
-                        rpg = new RPGPlayer(playerName);
-                        await message.Channel.SendMessageAsync(rpg.display());
-                    }
-                    catch
-                    {
-                        await message.Channel.SendMessageAsync("Joueur inconnu");
-                    }
-                }
-            }
-
-            if (message.Content.StartsWith("!jdr"))
-            {
-                await message.Channel.SendMessageAsync(Jdr.group(message.Content));
             }
 
             if ((message.Content.StartsWith("!pendu") && !gameStarted) || penduStarted)
